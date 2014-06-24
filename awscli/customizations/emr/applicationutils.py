@@ -35,6 +35,7 @@ def build_applications(parsed_applications, parsed_globals, ami_version=None):
             step_list.append(
                 emrutils.build_hive_install_step(
                     region=parsed_globals.region,
+                    args=app_config.get('Args'),
                     version=hive_version))
         elif app_name == constants.PIG:
             pig_version = app_config.get('Version')

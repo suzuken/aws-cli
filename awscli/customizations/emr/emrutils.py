@@ -165,7 +165,8 @@ def build_pig_install_step(region, version,
 
 
 def build_hive_install_step(region, version,
-                            action_on_failure=constants.TERMINATE_CLUSTER):
+                            action_on_failure=constants.TERMINATE_CLUSTER,
+                            args=None):
     step_args = [
         build_s3_link(constants.HIVE_SCRIPT_PATH, region),
         constants.INSTALL_HIVE_ARG,
@@ -173,6 +174,8 @@ def build_hive_install_step(region, version,
         build_s3_link(constants.HIVE_BASE_PATH),
         constants.HIVE_VERSIONS,
         version]
+    if args is not None:
+        step_args += args
     step = build_step(
         name=constants.INSTALL_HIVE_NAME,
         action_on_failure=action_on_failure,
